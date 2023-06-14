@@ -156,7 +156,7 @@ function init() {
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
-    gl.clearColor( 0.5, 0.5, 0.5, 1.0 );
+    gl.clearColor( 1, 1, 1, 1.0 );
 
     gl.enable(gl.DEPTH_TEST);
 
@@ -173,7 +173,7 @@ function init() {
     projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
 
     
-    lightPosition = vec4(-1.0, 1.0, 1.0, 1.0);   // directional light
+    lightPosition = vec4(0, 0, 0, 1.0);   // directional light
     lightPositionLoc = gl.getUniformLocation(program, "lightPosition");
 
     var lightAmbient = vec4(0.6, 0.2, 0.2, 1.0);        // La
@@ -198,16 +198,16 @@ function init() {
 
     colorCube();
     
-    // var vNormal = gl.getAttribLocation( program, "vNormal" );
-    // gl.vertexAttribPointer( vNormal, 3, gl.FLOAT, false, 0, 0 );
-    // gl.enableVertexAttribArray( vNormal );
-    
     var cBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(colorsArray), gl.STATIC_DRAW );
     var vColor = gl.getAttribLocation( program, "vColor" );
     gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vColor);
+    
+    var vNormal = gl.getAttribLocation( program, "vNormal" );
+    gl.vertexAttribPointer( vNormal, 3, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( vNormal );
 
     var vBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer);
